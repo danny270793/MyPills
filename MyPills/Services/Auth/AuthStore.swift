@@ -1,0 +1,88 @@
+//
+//  AuthStore.swift
+//  MyPills
+//
+//  UI-facing auth state. Views read isAuthenticated/isRestoringSession
+//  reactively and call signIn/signUp/signOut instead of touching
+//  AuthService or SessionStore directly.
+//
+
+import Foundation
+import Observation
+
+@Observable
+final class AuthStore {
+    private(set) var isAuthenticated = false
+    private(set) var isRestoringSession = true
+    private(set) var currentEmail: String?
+    var isLoading = false
+    var errorMessage: String?
+    var infoMessage: String?
+
+    private let auth = AuthService.shared
+    private let sessionStore = SessionStore.shared
+
+    func restoreSession() async {
+        defer { isRestoringSession = false }
+        guard let session = sessionStore.session else { return }
+
+        if session.expiresAt > Date() {
+            isAuthenticated = true
+            currentEmail = session.email
+            return
+        }
+
+        do {
+            let refreshed = try await auth.refresh(refreshToken: session.refreshToken)
+            sessionStore.save(refreshed)
+            isAuthenticated = true
+            currentEmail = refreshed.email
+        } catch {
+            sessionStore.clear()
+        }
+    }
+
+    func signIn(email: String, password: String) async {
+        isLoading = true
+        errorMessage = nil
+        infoMessage = nil
+        defer { isLoading = false }
+
+        do {
+            let session = try await auth.signIn(email: email, password: password)
+            sessionStore.save(session)
+            currentEmail = session.email
+            isAuthenticated = true
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func signUp(email: String, password: String) async {
+        isLoading = true
+        errorMessage = nil
+        infoMessage = nil
+        defer { isLoading = false }
+
+        do {
+            if let session = try await auth.signUp(email: email, password: password) {
+                sessionStore.save(session)
+                currentEmail = session.email
+                isAuthenticated = true
+            } else {
+                infoMessage = "Check your email to confirm your account, then sign in."
+            }
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func signOut() async {
+        if let token = sessionStore.accessToken {
+            try? await auth.signOut(accessToken: token)
+        }
+        sessionStore.clear()
+        isAuthenticated = false
+        currentEmail = nil
+    }
+}
