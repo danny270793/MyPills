@@ -127,7 +127,7 @@ struct PillsListView: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("This also deletes the \(sortedPills.count) \(sortedPills.count == 1 ? "pill" : "pills") inside it.")
+            Text("This also deletes the \(sortedPills.count) pills inside it.")
         }
         .task { await store.loadPills(folderId: folder.id) }
     }

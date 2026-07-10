@@ -75,7 +75,7 @@ final class AuthStore {
                 currentUserId = session.userId
                 isAuthenticated = true
             } else {
-                infoMessage = "Check your email to confirm your account, then sign in."
+                infoMessage = String(localized: "Check your email to confirm your account, then sign in.")
             }
         } catch {
             errorMessage = error.localizedDescription
@@ -100,7 +100,7 @@ final class AuthStore {
         defer { isLoading = false }
 
         guard let token = sessionStore.accessToken else {
-            errorMessage = "You need to be signed in to do that."
+            errorMessage = String(localized: "You need to be signed in to do that.")
             return false
         }
 

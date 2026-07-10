@@ -62,7 +62,7 @@ struct ChangePasswordView: View {
     }
 
     @ViewBuilder
-    private func passwordField(_ title: String, text: Binding<String>) -> some View {
+    private func passwordField(_ title: LocalizedStringKey, text: Binding<String>) -> some View {
         HStack {
             Group {
                 if isPasswordVisible {
