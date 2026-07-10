@@ -8,11 +8,17 @@ import SwiftUI
 struct ProfileView: View {
     @Environment(AuthStore.self) private var auth
     @State private var showingSignOutConfirm = false
+    @State private var showingChangePassword = false
 
     var body: some View {
         Form {
             Section("Account") {
                 LabeledContent("Email", value: auth.currentEmail ?? "—")
+                Button {
+                    showingChangePassword = true
+                } label: {
+                    Label("Change Password", systemImage: "lock.rotation")
+                }
             }
 
             Section {
@@ -38,6 +44,9 @@ struct ProfileView: View {
                 Task { await auth.signOut() }
             }
             Button("Cancel", role: .cancel) {}
+        }
+        .sheet(isPresented: $showingChangePassword) {
+            ChangePasswordView()
         }
     }
 }
