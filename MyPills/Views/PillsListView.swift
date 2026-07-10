@@ -4,21 +4,24 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct PillsListView: View {
-    @Bindable var folder: Folder
-
-    @Environment(\.modelContext) private var modelContext
+    @Environment(AppStore.self) private var store
     @Environment(\.dismiss) private var dismiss
+
+    let folder: Folder
 
     @State private var showingAddPill = false
     @State private var showingEditFolder = false
     @State private var showingDeleteConfirm = false
     @State private var searchText = ""
 
+    private var currentName: String {
+        store.folderSummaries.first(where: { $0.id == folder.id })?.name ?? folder.name
+    }
+
     private var sortedPills: [Pill] {
-        folder.pills.sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+        store.pills(for: folder.id).sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
     }
 
     private var filteredPills: [Pill] {
@@ -28,7 +31,7 @@ struct PillsListView: View {
 
     var body: some View {
         Group {
-            if folder.pills.isEmpty {
+            if sortedPills.isEmpty {
                 ContentUnavailableView(
                     "No Pills Yet",
                     systemImage: "pills",
@@ -44,7 +47,7 @@ struct PillsListView: View {
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {
-                                modelContext.delete(pill)
+                                Task { await store.deletePill(id: pill.id, folderId: folder.id) }
                             } label: {
                                 Label("Delete", systemImage: "trash")
                             }
@@ -56,12 +59,12 @@ struct PillsListView: View {
                 #endif
             }
         }
-        .navigationTitle(folder.name)
+        .navigationTitle(currentName)
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
         .navigationDestination(for: Pill.self) { pill in
-            PillDetailView(pill: pill)
+            PillDetailView(pill: pill, folderId: folder.id)
         }
         .searchable(text: $searchText, prompt: "Search pills")
         .toolbar {
@@ -90,23 +93,26 @@ struct PillsListView: View {
             }
         }
         .sheet(isPresented: $showingAddPill) {
-            PillFormView(pill: nil, folder: folder)
+            PillFormView(pill: nil, folderId: folder.id)
         }
         .sheet(isPresented: $showingEditFolder) {
             FolderFormView(folder: folder)
         }
         .confirmationDialog(
-            "Delete \(folder.name)?",
+            "Delete \(currentName)?",
             isPresented: $showingDeleteConfirm,
             titleVisibility: .visible
         ) {
             Button("Delete", role: .destructive) {
-                modelContext.delete(folder)
-                dismiss()
+                Task {
+                    await store.deleteFolder(id: folder.id)
+                    dismiss()
+                }
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("This also deletes the \(folder.pills.count) \(folder.pills.count == 1 ? "pill" : "pills") inside it.")
+            Text("This also deletes the \(sortedPills.count) \(sortedPills.count == 1 ? "pill" : "pills") inside it.")
         }
+        .task { await store.loadPills(folderId: folder.id) }
     }
 }
