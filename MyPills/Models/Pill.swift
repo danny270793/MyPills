@@ -8,12 +8,14 @@ import SwiftData
 
 @Model
 final class Pill {
-    var name: String
-    var details: String
+    // Every stored property needs a default value (or must be Optional) for
+    // SwiftData's CloudKit schema validation to accept the model.
+    var name: String = ""
+    var details: String = ""
     var photo: Data?
-    var quantity: Int
-    var price: Double
-    var createdAt: Date
+    var quantity: Int = 1
+    var price: Double = 0
+    var createdAt: Date = Date.now
 
     init(
         name: String = "",
