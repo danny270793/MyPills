@@ -17,13 +17,13 @@ enum SupabaseError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notAuthenticated:
-            return "You need to be signed in to do that."
+            return String(localized: "You need to be signed in to do that.")
         case .invalidResponse:
-            return "The server returned an unexpected response."
+            return String(localized: "The server returned an unexpected response.")
         case .requestFailed(let status, let body):
-            return "Request failed (\(status)): \(body)"
+            return String(localized: "Request failed (\(status)): \(body)")
         case .decodingFailed(let error):
-            return "Failed to decode response: \(error.localizedDescription)"
+            return String(localized: "Failed to decode response: \(error.localizedDescription)")
         }
     }
 }
