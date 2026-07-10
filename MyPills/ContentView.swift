@@ -6,40 +6,46 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query(sort: \Folder.name) private var folders: [Folder]
+    @Environment(AppStore.self) private var store
+    @Environment(AuthStore.self) private var auth
 
     @State private var showingAddFolder = false
     @State private var searchText = ""
 
-    private var filteredFolders: [Folder] {
-        guard !searchText.isEmpty else { return folders }
-        return folders.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+    private var filteredSummaries: [FolderSummary] {
+        guard !searchText.isEmpty else { return store.folderSummaries }
+        return store.folderSummaries.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+    }
+
+    private var errorBinding: Binding<Bool> {
+        Binding(
+            get: { store.errorMessage != nil },
+            set: { isPresented in if !isPresented { store.errorMessage = nil } }
+        )
     }
 
     var body: some View {
         NavigationStack {
             Group {
-                if folders.isEmpty {
+                if store.folderSummaries.isEmpty {
                     ContentUnavailableView(
                         "No Folders Yet",
                         systemImage: "folder",
                         description: Text("Tap the + button to create your first folder.")
                     )
-                } else if filteredFolders.isEmpty {
+                } else if filteredSummaries.isEmpty {
                     ContentUnavailableView.search(text: searchText)
                 } else {
                     List {
-                        ForEach(filteredFolders) { folder in
-                            NavigationLink(value: folder) {
-                                FolderRow(folder: folder)
+                        ForEach(filteredSummaries) { summary in
+                            NavigationLink(value: summary.folder) {
+                                FolderRow(summary: summary)
                             }
                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                 Button(role: .destructive) {
-                                    modelContext.delete(folder)
+                                    Task { await store.deleteFolder(id: summary.id) }
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
@@ -64,9 +70,30 @@ struct ContentView: View {
                         Label("Add Folder", systemImage: "folder.badge.plus")
                     }
                 }
+                ToolbarItem(placement: .secondaryAction) {
+                    Menu {
+                        if let email = auth.currentEmail {
+                            Text(email)
+                        }
+                        Button(role: .destructive) {
+                            Task { await auth.signOut() }
+                        } label: {
+                            Label("Sign Out", systemImage: "rectangle.portrait.and.arrow.right")
+                        }
+                    } label: {
+                        Image(systemName: "person.crop.circle")
+                    }
+                }
             }
             .sheet(isPresented: $showingAddFolder) {
                 FolderFormView(folder: nil)
+            }
+            .refreshable { await store.loadFolders() }
+            .task { await store.loadFolders() }
+            .alert("Something went wrong", isPresented: errorBinding) {
+                Button("OK") { store.errorMessage = nil }
+            } message: {
+                Text(store.errorMessage ?? "")
             }
         }
     }
@@ -74,5 +101,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Folder.self, Pill.self], inMemory: true)
+        .environment(AppStore())
+        .environment(AuthStore())
 }

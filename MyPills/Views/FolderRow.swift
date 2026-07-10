@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct FolderRow: View {
-    let folder: Folder
+    let summary: FolderSummary
 
     var body: some View {
         HStack(spacing: 12) {
@@ -20,9 +20,9 @@ struct FolderRow: View {
             .frame(width: 44, height: 44)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(folder.name)
+                Text(summary.name)
                     .font(.headline)
-                Text("\(folder.pills.count) \(folder.pills.count == 1 ? "pill" : "pills")")
+                Text("\(summary.pillCount) \(summary.pillCount == 1 ? "pill" : "pills")")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }

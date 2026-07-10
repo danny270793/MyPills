@@ -4,16 +4,20 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct PillDetailView: View {
-    @Bindable var pill: Pill
-
-    @Environment(\.modelContext) private var modelContext
+    @Environment(AppStore.self) private var store
     @Environment(\.dismiss) private var dismiss
+
+    let pill: Pill
+    let folderId: UUID
 
     @State private var showingEdit = false
     @State private var showingDeleteConfirm = false
+
+    private var currentPill: Pill {
+        store.pills(for: folderId).first(where: { $0.id == pill.id }) ?? pill
+    }
 
     private var currencyCode: String {
         Locale.current.currency?.identifier ?? "USD"
@@ -22,17 +26,17 @@ struct PillDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                PillImageView(data: pill.photo, cornerRadius: 24)
+                PillImageView(data: currentPill.photo, cornerRadius: 24)
                     .frame(width: 160, height: 160)
                     .shadow(color: .black.opacity(0.15), radius: 8, y: 4)
                     .padding(.top, 12)
 
                 VStack(spacing: 6) {
-                    Text(pill.name)
+                    Text(currentPill.name)
                         .font(.title2.bold())
                         .multilineTextAlignment(.center)
-                    if !pill.details.isEmpty {
-                        Text(pill.details)
+                    if !currentPill.details.isEmpty {
+                        Text(currentPill.details)
                             .font(.body)
                             .foregroundStyle(.secondary)
                             .multilineTextAlignment(.center)
@@ -41,10 +45,10 @@ struct PillDetailView: View {
                 .padding(.horizontal)
 
                 HStack(spacing: 16) {
-                    StatCard(title: "Quantity", value: "\(pill.quantity)", systemImage: "number")
+                    StatCard(title: "Quantity", value: "\(currentPill.quantity)", systemImage: "number")
                     StatCard(
                         title: "Price",
-                        value: pill.price.formatted(.currency(code: currencyCode)),
+                        value: currentPill.price.formatted(.currency(code: currencyCode)),
                         systemImage: "dollarsign.circle"
                     )
                 }
@@ -52,7 +56,7 @@ struct PillDetailView: View {
             }
             .padding(.vertical)
         }
-        .navigationTitle(pill.name)
+        .navigationTitle(currentPill.name)
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -75,16 +79,18 @@ struct PillDetailView: View {
             }
         }
         .sheet(isPresented: $showingEdit) {
-            PillFormView(pill: pill)
+            PillFormView(pill: currentPill, folderId: folderId)
         }
         .confirmationDialog(
-            "Delete \(pill.name)?",
+            "Delete \(currentPill.name)?",
             isPresented: $showingDeleteConfirm,
             titleVisibility: .visible
         ) {
             Button("Delete", role: .destructive) {
-                modelContext.delete(pill)
-                dismiss()
+                Task {
+                    await store.deletePill(id: currentPill.id, folderId: folderId)
+                    dismiss()
+                }
             }
             Button("Cancel", role: .cancel) {}
         }

@@ -4,16 +4,16 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct FolderFormView: View {
-    @Environment(\.modelContext) private var modelContext
+    @Environment(AppStore.self) private var store
     @Environment(\.dismiss) private var dismiss
 
     /// Folder being edited, or nil when creating a new one.
     var folder: Folder?
 
     @State private var name: String = ""
+    @State private var isSaving = false
 
     private var isEditing: Bool { folder != nil }
 
@@ -32,11 +32,12 @@ struct FolderFormView: View {
                     Button("Cancel") { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") { save() }
-                        .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    Button("Save") { Task { await save() } }
+                        .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isSaving)
                 }
             }
             .onAppear(perform: loadExistingFolder)
+            .disabled(isSaving)
         }
     }
 
@@ -45,13 +46,15 @@ struct FolderFormView: View {
         name = folder.name
     }
 
-    private func save() {
+    private func save() async {
+        isSaving = true
+        defer { isSaving = false }
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
 
         if let folder {
-            folder.name = trimmedName
+            await store.renameFolder(id: folder.id, name: trimmedName)
         } else {
-            modelContext.insert(Folder(name: trimmedName))
+            await store.createFolder(name: trimmedName)
         }
 
         dismiss()

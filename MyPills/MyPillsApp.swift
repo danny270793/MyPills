@@ -6,23 +6,17 @@
 //
 
 import SwiftUI
-import SwiftData
 
 @main
 struct MyPillsApp: App {
+    @State private var authStore = AuthStore()
+    @State private var appStore = AppStore()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environment(authStore)
+                .environment(appStore)
         }
-        .modelContainer(Self.sharedModelContainer)
     }
-
-    private static let sharedModelContainer: ModelContainer = {
-        let configuration = ModelConfiguration(cloudKitDatabase: .automatic)
-        do {
-            return try ModelContainer(for: Folder.self, Pill.self, configurations: configuration)
-        } catch {
-            fatalError("Failed to create ModelContainer: \(error)")
-        }
-    }()
 }
