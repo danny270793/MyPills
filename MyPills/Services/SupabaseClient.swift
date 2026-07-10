@@ -78,7 +78,10 @@ struct SupabaseClient {
         var request = URLRequest(url: components.url!)
         request.httpMethod = method
         request.setValue(SupabaseConfig.anonKey, forHTTPHeaderField: "apikey")
-        request.setValue("Bearer \(SupabaseConfig.anonKey)", forHTTPHeaderField: "Authorization")
+        // Authenticate as the signed-in user (not just the anon key) so
+        // row-level security policies can key off auth.uid().
+        let accessToken = SessionStore.shared.accessToken ?? SupabaseConfig.anonKey
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         return request
     }
