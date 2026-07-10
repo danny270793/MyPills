@@ -11,6 +11,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isSignUpMode = false
+    @State private var isPasswordVisible = false
 
     private var isValid: Bool {
         !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && password.count >= 6
@@ -48,8 +49,30 @@ struct LoginView: View {
                         .autocorrectionDisabled()
                         .textFieldStyle(.roundedBorder)
 
-                    SecureField("Password", text: $password)
+                    ZStack(alignment: .trailing) {
+                        Group {
+                            if isPasswordVisible {
+                                TextField("Password", text: $password)
+                            } else {
+                                SecureField("Password", text: $password)
+                            }
+                        }
                         .textFieldStyle(.roundedBorder)
+                        #if os(iOS)
+                        .textInputAutocapitalization(.never)
+                        #endif
+                        .autocorrectionDisabled()
+
+                        Button {
+                            isPasswordVisible.toggle()
+                        } label: {
+                            Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                                .foregroundStyle(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 8)
+                        .accessibilityLabel(isPasswordVisible ? "Hide password" : "Show password")
+                    }
 
                     if let errorMessage = auth.errorMessage {
                         Text(errorMessage)
