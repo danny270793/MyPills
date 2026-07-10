@@ -74,15 +74,8 @@ struct ContentView: View {
                     }
                 }
                 ToolbarItem(placement: .secondaryAction) {
-                    Menu {
-                        if let email = auth.currentEmail {
-                            Text(email)
-                        }
-                        Button(role: .destructive) {
-                            Task { await auth.signOut() }
-                        } label: {
-                            Label("Sign Out", systemImage: "rectangle.portrait.and.arrow.right")
-                        }
+                    NavigationLink {
+                        ProfileView()
                     } label: {
                         Image(systemName: "person.crop.circle")
                     }
