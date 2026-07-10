@@ -30,7 +30,9 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if store.folderSummaries.isEmpty {
+                if !store.hasLoadedFolders {
+                    ProgressView()
+                } else if store.folderSummaries.isEmpty {
                     ContentUnavailableView(
                         "No Folders Yet",
                         systemImage: "folder",
