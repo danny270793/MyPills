@@ -24,22 +24,31 @@
 //  alter table public.folders enable row level security;
 //  alter table public.pills enable row level security;
 //
-//  -- Permissive demo policies so the anon key can read/write. Replace
-//  -- with policies scoped to an authenticated user before shipping.
-//  create policy "anon full access" on public.folders for all using (true) with check (true);
-//  create policy "anon full access" on public.pills for all using (true) with check (true);
+//  -- The app now signs users in (see AuthStore/LoginView) and sends
+//  -- their access token on every request, so policies can require
+//  -- auth.role() = 'authenticated' instead of leaving the anon key
+//  -- wide open. This still shares one pool of folders/pills across
+//  -- every signed-in user:
+//  create policy "authenticated full access" on public.folders
+//    for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
+//  create policy "authenticated full access" on public.pills
+//    for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
+//
+//  -- For real per-user data isolation instead, add a user_id column to
+//  -- both tables (uuid references auth.users(id) default auth.uid())
+//  -- and scope policies to `user_id = auth.uid()`.
 //
 
 import Foundation
 
 enum SupabaseConfig {
     /// Your Supabase project URL, e.g. https://xyzcompany.supabase.co
-    static let url = URL(string: "https://YOUR_PROJECT.supabase.co")!
+    static let url = URL(string: "https://fjlxyavrbpfwmckwfelc.supabase.co")!
 
     /// Project Settings -> API -> anon/public key.
-    static let anonKey = "YOUR_SUPABASE_ANON_KEY"
+    static let anonKey = "sb_publishable_mvkjiWstk1rKs-BZ0jIldg_jNwt3Lpy"
 
     /// Table names, in case they differ from the schema above.
-    static let foldersTable = "folders"
-    static let pillsTable = "pills"
+    static let foldersTable = "health_folders"
+    static let pillsTable = "health_pills"
 }
