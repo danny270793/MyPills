@@ -6,40 +6,46 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query(sort: \Pill.name) private var pills: [Pill]
+    @Environment(AppStore.self) private var store
+    @Environment(AuthStore.self) private var auth
 
-    @State private var showingAddPill = false
+    @State private var showingAddFolder = false
     @State private var searchText = ""
 
-    private var filteredPills: [Pill] {
-        guard !searchText.isEmpty else { return pills }
-        return pills.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+    private var filteredSummaries: [FolderSummary] {
+        guard !searchText.isEmpty else { return store.folderSummaries }
+        return store.folderSummaries.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+    }
+
+    private var errorBinding: Binding<Bool> {
+        Binding(
+            get: { store.errorMessage != nil },
+            set: { isPresented in if !isPresented { store.errorMessage = nil } }
+        )
     }
 
     var body: some View {
         NavigationStack {
             Group {
-                if pills.isEmpty {
+                if store.folderSummaries.isEmpty {
                     ContentUnavailableView(
-                        "No Pills Yet",
-                        systemImage: "pills",
-                        description: Text("Tap the + button to add your first pill.")
+                        "No Folders Yet",
+                        systemImage: "folder",
+                        description: Text("Tap the + button to create your first folder.")
                     )
-                } else if filteredPills.isEmpty {
+                } else if filteredSummaries.isEmpty {
                     ContentUnavailableView.search(text: searchText)
                 } else {
                     List {
-                        ForEach(filteredPills) { pill in
-                            NavigationLink(value: pill) {
-                                PillRow(pill: pill)
+                        ForEach(filteredSummaries) { summary in
+                            NavigationLink(value: summary.folder) {
+                                FolderRow(summary: summary)
                             }
                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                 Button(role: .destructive) {
-                                    modelContext.delete(pill)
+                                    Task { await store.deleteFolder(id: summary.id) }
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
@@ -51,22 +57,43 @@ struct ContentView: View {
                     #endif
                 }
             }
-            .navigationTitle("My Pills")
-            .navigationDestination(for: Pill.self) { pill in
-                PillDetailView(pill: pill)
+            .navigationTitle("Folders")
+            .navigationDestination(for: Folder.self) { folder in
+                PillsListView(folder: folder)
             }
-            .searchable(text: $searchText, prompt: "Search pills")
+            .searchable(text: $searchText, prompt: "Search folders")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
-                        showingAddPill = true
+                        showingAddFolder = true
                     } label: {
-                        Label("Add Pill", systemImage: "plus")
+                        Label("Add Folder", systemImage: "folder.badge.plus")
+                    }
+                }
+                ToolbarItem(placement: .secondaryAction) {
+                    Menu {
+                        if let email = auth.currentEmail {
+                            Text(email)
+                        }
+                        Button(role: .destructive) {
+                            Task { await auth.signOut() }
+                        } label: {
+                            Label("Sign Out", systemImage: "rectangle.portrait.and.arrow.right")
+                        }
+                    } label: {
+                        Image(systemName: "person.crop.circle")
                     }
                 }
             }
-            .sheet(isPresented: $showingAddPill) {
-                PillFormView(pill: nil)
+            .sheet(isPresented: $showingAddFolder) {
+                FolderFormView(folder: nil)
+            }
+            .refreshable { await store.loadFolders() }
+            .task { await store.loadFolders() }
+            .alert("Something went wrong", isPresented: errorBinding) {
+                Button("OK") { store.errorMessage = nil }
+            } message: {
+                Text(store.errorMessage ?? "")
             }
         }
     }
@@ -74,5 +101,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Pill.self, inMemory: true)
+        .environment(AppStore())
+        .environment(AuthStore())
 }

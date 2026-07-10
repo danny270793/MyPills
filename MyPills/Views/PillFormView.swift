@@ -4,15 +4,16 @@
 //
 
 import SwiftUI
-import SwiftData
 import PhotosUI
 
 struct PillFormView: View {
-    @Environment(\.modelContext) private var modelContext
+    @Environment(AppStore.self) private var store
     @Environment(\.dismiss) private var dismiss
 
     /// Pill being edited, or nil when creating a new one.
     var pill: Pill?
+    /// Folder the pill belongs to.
+    var folderId: UUID
 
     @State private var name: String = ""
     @State private var details: String = ""
@@ -20,6 +21,7 @@ struct PillFormView: View {
     @State private var price: Double = 0
     @State private var photoData: Data?
     @State private var selectedPhotoItem: PhotosPickerItem?
+    @State private var isSaving = false
 
     private var isEditing: Bool { pill != nil }
     private var currencyCode: String {
@@ -83,8 +85,8 @@ struct PillFormView: View {
                     Button("Cancel") { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") { save() }
-                        .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    Button("Save") { Task { await save() } }
+                        .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isSaving)
                 }
             }
             .onAppear(perform: loadExistingPill)
@@ -94,6 +96,7 @@ struct PillFormView: View {
                     photoData = data
                 }
             }
+            .disabled(isSaving)
         }
     }
 
@@ -106,25 +109,22 @@ struct PillFormView: View {
         photoData = pill.photo
     }
 
-    private func save() {
-        let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedDetails = details.trimmingCharacters(in: .whitespacesAndNewlines)
+    private func save() async {
+        isSaving = true
+        defer { isSaving = false }
+
+        let draft = PillDraft(
+            name: name.trimmingCharacters(in: .whitespacesAndNewlines),
+            details: details.trimmingCharacters(in: .whitespacesAndNewlines),
+            photo: photoData,
+            quantity: quantity,
+            price: price
+        )
 
         if let pill {
-            pill.name = trimmedName
-            pill.details = trimmedDetails
-            pill.quantity = quantity
-            pill.price = price
-            pill.photo = photoData
+            await store.updatePill(id: pill.id, draft: draft, folderId: folderId)
         } else {
-            let newPill = Pill(
-                name: trimmedName,
-                details: trimmedDetails,
-                photo: photoData,
-                quantity: quantity,
-                price: price
-            )
-            modelContext.insert(newPill)
+            await store.createPill(draft, folderId: folderId)
         }
 
         dismiss()
