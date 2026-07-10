@@ -40,14 +40,17 @@ struct ContentView: View {
                 } else {
                     List {
                         ForEach(filteredSummaries) { summary in
+                            let isOwner = summary.userId == auth.currentUserId
                             NavigationLink(value: summary.folder) {
-                                FolderRow(summary: summary)
+                                FolderRow(summary: summary, isSharedWithMe: !isOwner)
                             }
                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                Button(role: .destructive) {
-                                    Task { await store.deleteFolder(id: summary.id) }
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
+                                if isOwner {
+                                    Button(role: .destructive) {
+                                        Task { await store.deleteFolder(id: summary.id) }
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
                                 }
                             }
                         }
