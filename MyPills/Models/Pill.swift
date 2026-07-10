@@ -16,6 +16,7 @@ final class Pill {
     var quantity: Int = 1
     var price: Double = 0
     var createdAt: Date = Date.now
+    var folder: Folder?
 
     init(
         name: String = "",
@@ -23,7 +24,8 @@ final class Pill {
         photo: Data? = nil,
         quantity: Int = 1,
         price: Double = 0,
-        createdAt: Date = .now
+        createdAt: Date = .now,
+        folder: Folder? = nil
     ) {
         self.name = name
         self.details = details
@@ -31,5 +33,6 @@ final class Pill {
         self.quantity = quantity
         self.price = price
         self.createdAt = createdAt
+        self.folder = folder
     }
 }

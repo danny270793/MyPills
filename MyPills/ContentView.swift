@@ -10,36 +10,36 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: \Pill.name) private var pills: [Pill]
+    @Query(sort: \Folder.name) private var folders: [Folder]
 
-    @State private var showingAddPill = false
+    @State private var showingAddFolder = false
     @State private var searchText = ""
 
-    private var filteredPills: [Pill] {
-        guard !searchText.isEmpty else { return pills }
-        return pills.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+    private var filteredFolders: [Folder] {
+        guard !searchText.isEmpty else { return folders }
+        return folders.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
     }
 
     var body: some View {
         NavigationStack {
             Group {
-                if pills.isEmpty {
+                if folders.isEmpty {
                     ContentUnavailableView(
-                        "No Pills Yet",
-                        systemImage: "pills",
-                        description: Text("Tap the + button to add your first pill.")
+                        "No Folders Yet",
+                        systemImage: "folder",
+                        description: Text("Tap the + button to create your first folder.")
                     )
-                } else if filteredPills.isEmpty {
+                } else if filteredFolders.isEmpty {
                     ContentUnavailableView.search(text: searchText)
                 } else {
                     List {
-                        ForEach(filteredPills) { pill in
-                            NavigationLink(value: pill) {
-                                PillRow(pill: pill)
+                        ForEach(filteredFolders) { folder in
+                            NavigationLink(value: folder) {
+                                FolderRow(folder: folder)
                             }
                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                 Button(role: .destructive) {
-                                    modelContext.delete(pill)
+                                    modelContext.delete(folder)
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
@@ -51,22 +51,22 @@ struct ContentView: View {
                     #endif
                 }
             }
-            .navigationTitle("My Pills")
-            .navigationDestination(for: Pill.self) { pill in
-                PillDetailView(pill: pill)
+            .navigationTitle("Folders")
+            .navigationDestination(for: Folder.self) { folder in
+                PillsListView(folder: folder)
             }
-            .searchable(text: $searchText, prompt: "Search pills")
+            .searchable(text: $searchText, prompt: "Search folders")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
-                        showingAddPill = true
+                        showingAddFolder = true
                     } label: {
-                        Label("Add Pill", systemImage: "plus")
+                        Label("Add Folder", systemImage: "folder.badge.plus")
                     }
                 }
             }
-            .sheet(isPresented: $showingAddPill) {
-                PillFormView(pill: nil)
+            .sheet(isPresented: $showingAddFolder) {
+                FolderFormView(folder: nil)
             }
         }
     }
@@ -74,5 +74,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Pill.self, inMemory: true)
+        .modelContainer(for: [Folder.self, Pill.self], inMemory: true)
 }
