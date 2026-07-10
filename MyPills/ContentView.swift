@@ -77,11 +77,11 @@ struct ContentView: View {
                         Label("Add Folder", systemImage: "folder.badge.plus")
                     }
                 }
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem(placement: .secondaryAction) {
                     Button {
                         showingProfile = true
                     } label: {
-                        Image(systemName: "person.crop.circle")
+                        Label("Profile", systemImage: "person.crop.circle")
                     }
                 }
             }
