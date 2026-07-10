@@ -9,12 +9,14 @@ import SwiftUI
 
 @main
 struct MyPillsApp: App {
-    @State private var store = AppStore()
+    @State private var authStore = AuthStore()
+    @State private var appStore = AppStore()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(store)
+            RootView()
+                .environment(authStore)
+                .environment(appStore)
         }
     }
 }
