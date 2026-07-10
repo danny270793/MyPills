@@ -15,6 +15,7 @@ final class AppStore {
     private(set) var folderSummaries: [FolderSummary] = []
     private(set) var pillsByFolder: [UUID: [Pill]] = [:]
     private(set) var sharesByFolder: [UUID: [FolderShare]] = [:]
+    private(set) var hasLoadedFolders = false
     var errorMessage: String?
 
     private let folders = FoldersService.shared
@@ -34,6 +35,7 @@ final class AppStore {
         } catch {
             errorMessage = error.localizedDescription
         }
+        hasLoadedFolders = true
     }
 
     func loadPills(folderId: UUID) async {
