@@ -21,7 +21,10 @@ struct FoldersService {
     }
 
     func create(name: String) async throws -> Folder {
-        try await client.insert(SupabaseConfig.foldersTable, values: NewFolder(name: name))
+        guard let userId = SessionStore.shared.session?.userId else {
+            throw SupabaseError.notAuthenticated
+        }
+        return try await client.insert(SupabaseConfig.foldersTable, values: NewFolder(userId: userId, name: name))
     }
 
     func rename(id: UUID, name: String) async throws -> Folder {
@@ -29,11 +32,13 @@ struct FoldersService {
     }
 
     func delete(id: UUID) async throws {
-        try await client.delete(SupabaseConfig.foldersTable, id: id)
+        let succeeded = try await client.rpc("soft_delete_health_folder", params: ["p_id": id.uuidString])
+        guard succeeded else { throw SupabaseError.invalidResponse }
     }
 }
 
 private struct NewFolder: Encodable {
+    let userId: UUID
     let name: String
 }
 
