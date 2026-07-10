@@ -7,6 +7,7 @@ import Foundation
 
 struct Pill: Identifiable, Codable, Hashable {
     var id: UUID
+    var userId: UUID
     var folderId: UUID
     var name: String
     var details: String
@@ -14,13 +15,8 @@ struct Pill: Identifiable, Codable, Hashable {
     var quantity: Int
     var price: Double
     var createdAt: Date
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, details, quantity, price
-        case folderId = "folder_id"
-        case photoBase64 = "photo_base64"
-        case createdAt = "created_at"
-    }
+    var updatedAt: Date
+    var deletedAt: Date?
 
     var photo: Data? {
         photoBase64.flatMap { Data(base64Encoded: $0) }
