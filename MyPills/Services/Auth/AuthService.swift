@@ -47,6 +47,24 @@ struct AuthService {
         }
     }
 
+    func updatePassword(accessToken: String, newPassword: String) async throws {
+        var request = makeRequest(path: "user")
+        request.httpMethod = "PUT"
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.httpBody = try JSONEncoder().encode(["password": newPassword])
+
+        let (data, response) = try await session.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw SupabaseError.invalidResponse
+        }
+        guard (200..<300).contains(httpResponse.statusCode) else {
+            let body = (try? JSONDecoder().decode(AuthErrorBody.self, from: data))?.message
+                ?? String(data: data, encoding: .utf8)
+                ?? ""
+            throw SupabaseError.requestFailed(status: httpResponse.statusCode, body: body)
+        }
+    }
+
     private func makeTokenRequest(grantType: String, body: [String: String]) throws -> URLRequest {
         var request = makeRequest(path: "token", query: [URLQueryItem(name: "grant_type", value: grantType)])
         request.httpBody = try JSONEncoder().encode(body)
