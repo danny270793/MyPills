@@ -14,6 +14,7 @@ import Observation
 final class AppStore {
     private(set) var folderSummaries: [FolderSummary] = []
     private(set) var pillsByFolder: [UUID: [Pill]] = [:]
+    private(set) var sharesByFolder: [UUID: [FolderShare]] = [:]
     var errorMessage: String?
 
     private let folders = FoldersService.shared
@@ -21,6 +22,10 @@ final class AppStore {
 
     func pills(for folderId: UUID) -> [Pill] {
         pillsByFolder[folderId] ?? []
+    }
+
+    func shares(for folderId: UUID) -> [FolderShare] {
+        sharesByFolder[folderId] ?? []
     }
 
     func loadFolders() async {
@@ -91,6 +96,32 @@ final class AppStore {
             try await pills.delete(id: id)
             await loadPills(folderId: folderId)
             await loadFolders()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func loadShares(folderId: UUID) async {
+        do {
+            sharesByFolder[folderId] = try await folders.shares(folderId: folderId)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func shareFolder(id: UUID, email: String) async {
+        do {
+            try await folders.share(folderId: id, email: email)
+            await loadShares(folderId: id)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func unshareFolder(id: UUID, email: String) async {
+        do {
+            try await folders.unshare(folderId: id, email: email)
+            await loadShares(folderId: id)
         } catch {
             errorMessage = error.localizedDescription
         }
