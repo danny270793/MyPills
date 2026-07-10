@@ -113,3 +113,19 @@ final class AuthStore {
         }
     }
 }
+
+#if DEBUG
+extension AuthStore {
+    /// Builds an already-"signed-in" store for #Preview use, since
+    /// currentUserId/currentEmail/isAuthenticated only change via the
+    /// real network-backed sign in/restore flow otherwise.
+    static func preview(userId: UUID = UUID(), email: String = "preview@example.com") -> AuthStore {
+        let store = AuthStore()
+        store.currentUserId = userId
+        store.currentEmail = email
+        store.isAuthenticated = true
+        store.isRestoringSession = false
+        return store
+    }
+}
+#endif
