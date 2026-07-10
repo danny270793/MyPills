@@ -83,24 +83,24 @@ struct PillsListView: View {
             }
             if isOwner {
                 ToolbarItem(placement: .secondaryAction) {
-                    Menu {
-                        Button {
-                            showingShareFolder = true
-                        } label: {
-                            Label("Share Folder", systemImage: "person.crop.circle.badge.plus")
-                        }
-                        Button {
-                            showingEditFolder = true
-                        } label: {
-                            Label("Rename Folder", systemImage: "pencil")
-                        }
-                        Button(role: .destructive) {
-                            showingDeleteConfirm = true
-                        } label: {
-                            Label("Delete Folder", systemImage: "trash")
-                        }
+                    Button {
+                        showingShareFolder = true
                     } label: {
-                        Image(systemName: "ellipsis.circle")
+                        Label("Share Folder", systemImage: "person.crop.circle.badge.plus")
+                    }
+                }
+                ToolbarItem(placement: .secondaryAction) {
+                    Button {
+                        showingEditFolder = true
+                    } label: {
+                        Label("Rename Folder", systemImage: "pencil")
+                    }
+                }
+                ToolbarItem(placement: .secondaryAction) {
+                    Button(role: .destructive) {
+                        showingDeleteConfirm = true
+                    } label: {
+                        Label("Delete Folder", systemImage: "trash")
                     }
                 }
             }
