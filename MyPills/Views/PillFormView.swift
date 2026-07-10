@@ -13,6 +13,8 @@ struct PillFormView: View {
 
     /// Pill being edited, or nil when creating a new one.
     var pill: Pill?
+    /// Folder the new pill is created into. Ignored when editing an existing pill.
+    var folder: Folder?
 
     @State private var name: String = ""
     @State private var details: String = ""
@@ -122,7 +124,8 @@ struct PillFormView: View {
                 details: trimmedDetails,
                 photo: photoData,
                 quantity: quantity,
-                price: price
+                price: price,
+                folder: folder
             )
             modelContext.insert(newPill)
         }
