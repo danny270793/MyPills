@@ -19,10 +19,7 @@ struct PillsListView: View {
     @State private var searchText = ""
 
     private var isOwner: Bool {
-        if(auth.currentUserId == nil) {
-            return true
-        }
-        return folder.userId == auth.currentUserId
+        folder.userId == auth.currentUserId
     }
 
     private var currentName: String {
@@ -136,7 +133,23 @@ struct PillsListView: View {
     }
 }
 
-#Preview {
+#Preview("Owner") {
+    let ownerId = UUID()
+    NavigationStack {
+        PillsListView(folder: Folder(
+            id: UUID(),
+            userId: ownerId,
+            name: "Daily Vitamins",
+            createdAt: .now,
+            updatedAt: .now,
+            deletedAt: nil
+        ))
+        .environment(AppStore())
+        .environment(AuthStore.preview(userId: ownerId))
+    }
+}
+
+#Preview("Shared") {
     NavigationStack {
         PillsListView(folder: Folder(
             id: UUID(),
@@ -147,6 +160,6 @@ struct PillsListView: View {
             deletedAt: nil
         ))
         .environment(AppStore())
-        .environment(AuthStore())
+        .environment(AuthStore.preview())
     }
 }
