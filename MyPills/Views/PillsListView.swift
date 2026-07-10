@@ -7,14 +7,20 @@ import SwiftUI
 
 struct PillsListView: View {
     @Environment(AppStore.self) private var store
+    @Environment(AuthStore.self) private var auth
     @Environment(\.dismiss) private var dismiss
 
     let folder: Folder
 
     @State private var showingAddPill = false
     @State private var showingEditFolder = false
+    @State private var showingShareFolder = false
     @State private var showingDeleteConfirm = false
     @State private var searchText = ""
+
+    private var isOwner: Bool {
+        folder.userId == auth.currentUserId
+    }
 
     private var currentName: String {
         store.folderSummaries.first(where: { $0.id == folder.id })?.name ?? folder.name
@@ -75,20 +81,27 @@ struct PillsListView: View {
                     Label("Add Pill", systemImage: "plus")
                 }
             }
-            ToolbarItem(placement: .secondaryAction) {
-                Menu {
-                    Button {
-                        showingEditFolder = true
+            if isOwner {
+                ToolbarItem(placement: .secondaryAction) {
+                    Menu {
+                        Button {
+                            showingShareFolder = true
+                        } label: {
+                            Label("Share Folder", systemImage: "person.crop.circle.badge.plus")
+                        }
+                        Button {
+                            showingEditFolder = true
+                        } label: {
+                            Label("Rename Folder", systemImage: "pencil")
+                        }
+                        Button(role: .destructive) {
+                            showingDeleteConfirm = true
+                        } label: {
+                            Label("Delete Folder", systemImage: "trash")
+                        }
                     } label: {
-                        Label("Rename Folder", systemImage: "pencil")
+                        Image(systemName: "ellipsis.circle")
                     }
-                    Button(role: .destructive) {
-                        showingDeleteConfirm = true
-                    } label: {
-                        Label("Delete Folder", systemImage: "trash")
-                    }
-                } label: {
-                    Image(systemName: "ellipsis.circle")
                 }
             }
         }
@@ -97,6 +110,9 @@ struct PillsListView: View {
         }
         .sheet(isPresented: $showingEditFolder) {
             FolderFormView(folder: folder)
+        }
+        .sheet(isPresented: $showingShareFolder) {
+            FolderShareView(folder: folder)
         }
         .confirmationDialog(
             "Delete \(currentName)?",

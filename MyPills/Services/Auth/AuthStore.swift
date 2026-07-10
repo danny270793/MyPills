@@ -15,6 +15,7 @@ final class AuthStore {
     private(set) var isAuthenticated = false
     private(set) var isRestoringSession = true
     private(set) var currentEmail: String?
+    private(set) var currentUserId: UUID?
     var isLoading = false
     var errorMessage: String?
     var infoMessage: String?
@@ -29,6 +30,7 @@ final class AuthStore {
         if session.expiresAt > Date() {
             isAuthenticated = true
             currentEmail = session.email
+            currentUserId = session.userId
             return
         }
 
@@ -37,6 +39,7 @@ final class AuthStore {
             sessionStore.save(refreshed)
             isAuthenticated = true
             currentEmail = refreshed.email
+            currentUserId = refreshed.userId
         } catch {
             sessionStore.clear()
         }
@@ -52,6 +55,7 @@ final class AuthStore {
             let session = try await auth.signIn(email: email, password: password)
             sessionStore.save(session)
             currentEmail = session.email
+            currentUserId = session.userId
             isAuthenticated = true
         } catch {
             errorMessage = error.localizedDescription
@@ -68,6 +72,7 @@ final class AuthStore {
             if let session = try await auth.signUp(email: email, password: password) {
                 sessionStore.save(session)
                 currentEmail = session.email
+                currentUserId = session.userId
                 isAuthenticated = true
             } else {
                 infoMessage = "Check your email to confirm your account, then sign in."
@@ -84,5 +89,6 @@ final class AuthStore {
         sessionStore.clear()
         isAuthenticated = false
         currentEmail = nil
+        currentUserId = nil
     }
 }

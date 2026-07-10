@@ -35,6 +35,33 @@ struct FoldersService {
         let succeeded = try await client.rpc("soft_delete_health_folder", params: ["p_id": id.uuidString])
         guard succeeded else { throw SupabaseError.invalidResponse }
     }
+
+    func shares(folderId: UUID) async throws -> [FolderShare] {
+        try await client.fetch(
+            SupabaseConfig.folderSharesTable,
+            query: [
+                URLQueryItem(name: "folderId", value: "eq.\(folderId.uuidString)"),
+                URLQueryItem(name: "deletedAt", value: "is.null"),
+                URLQueryItem(name: "order", value: "createdAt.asc"),
+            ]
+        )
+    }
+
+    func share(folderId: UUID, email: String) async throws {
+        let succeeded = try await client.rpc(
+            "share_health_folder",
+            params: ["p_folder_id": folderId.uuidString, "p_email": email]
+        )
+        guard succeeded else { throw SupabaseError.invalidResponse }
+    }
+
+    func unshare(folderId: UUID, email: String) async throws {
+        let succeeded = try await client.rpc(
+            "unshare_health_folder",
+            params: ["p_folder_id": folderId.uuidString, "p_email": email]
+        )
+        guard succeeded else { throw SupabaseError.invalidResponse }
+    }
 }
 
 private struct NewFolder: Encodable {

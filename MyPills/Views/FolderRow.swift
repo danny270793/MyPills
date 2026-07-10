@@ -7,6 +7,7 @@ import SwiftUI
 
 struct FolderRow: View {
     let summary: FolderSummary
+    var isSharedWithMe: Bool = false
 
     var body: some View {
         HStack(spacing: 12) {
@@ -28,6 +29,12 @@ struct FolderRow: View {
             }
 
             Spacer()
+
+            if isSharedWithMe {
+                Image(systemName: "person.2.fill")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding(.vertical, 4)
     }

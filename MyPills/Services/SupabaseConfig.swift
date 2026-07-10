@@ -3,10 +3,12 @@
 //  MyPills
 //
 //  Schema lives in supabase/migrations/ (health_folders, health_pills,
-//  and their soft-delete RPCs) — run `supabase db push` to apply it.
-//  Both tables use a "userId" ownership column scoped to auth.uid() via
-//  RLS, and soft delete via "deletedAt" (rows are never hard-deleted;
-//  see soft_delete_health_folder / soft_delete_health_pill).
+//  health_folder_shares, and their RPCs) — run `supabase db push` to
+//  apply it. Folders/pills use a "userId" ownership column and soft
+//  delete via "deletedAt" (rows are never hard-deleted; see
+//  soft_delete_health_folder / soft_delete_health_pill). Folders can
+//  also be shared by email via health_folder_shares — see
+//  has_health_folder_access / share_health_folder / unshare_health_folder.
 //
 
 import Foundation
@@ -21,4 +23,5 @@ enum SupabaseConfig {
     /// Table names, in case they differ from the schema above.
     static let foldersTable = "health_folders"
     static let pillsTable = "health_pills"
+    static let folderSharesTable = "health_folder_shares"
 }
