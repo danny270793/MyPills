@@ -20,7 +20,7 @@ struct MyPillsApp: App {
     private static let sharedModelContainer: ModelContainer = {
         let configuration = ModelConfiguration(cloudKitDatabase: .automatic)
         do {
-            return try ModelContainer(for: Pill.self, configurations: configuration)
+            return try ModelContainer(for: Folder.self, Pill.self, configurations: configuration)
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
