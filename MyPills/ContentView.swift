@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(AppStore.self) private var store
+    @Environment(AuthStore.self) private var auth
 
     @State private var showingAddFolder = false
     @State private var searchText = ""
@@ -69,6 +70,20 @@ struct ContentView: View {
                         Label("Add Folder", systemImage: "folder.badge.plus")
                     }
                 }
+                ToolbarItem(placement: .secondaryAction) {
+                    Menu {
+                        if let email = auth.currentEmail {
+                            Text(email)
+                        }
+                        Button(role: .destructive) {
+                            Task { await auth.signOut() }
+                        } label: {
+                            Label("Sign Out", systemImage: "rectangle.portrait.and.arrow.right")
+                        }
+                    } label: {
+                        Image(systemName: "person.crop.circle")
+                    }
+                }
             }
             .sheet(isPresented: $showingAddFolder) {
                 FolderFormView(folder: nil)
@@ -87,4 +102,5 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environment(AppStore())
+        .environment(AuthStore())
 }
