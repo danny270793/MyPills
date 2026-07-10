@@ -23,7 +23,7 @@ struct FolderRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(summary.name)
                     .font(.headline)
-                Text("\(summary.pillCount) \(summary.pillCount == 1 ? "pill" : "pills")")
+                Text("\(summary.pillCount) pills")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
