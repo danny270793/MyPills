@@ -91,4 +91,41 @@ final class AuthStore {
         currentEmail = nil
         currentUserId = nil
     }
+
+    @discardableResult
+    func changePassword(newPassword: String) async -> Bool {
+        isLoading = true
+        errorMessage = nil
+        infoMessage = nil
+        defer { isLoading = false }
+
+        guard let token = sessionStore.accessToken else {
+            errorMessage = "You need to be signed in to do that."
+            return false
+        }
+
+        do {
+            try await auth.updatePassword(accessToken: token, newPassword: newPassword)
+            return true
+        } catch {
+            errorMessage = error.localizedDescription
+            return false
+        }
+    }
 }
+
+#if DEBUG
+extension AuthStore {
+    /// Builds an already-"signed-in" store for #Preview use, since
+    /// currentUserId/currentEmail/isAuthenticated only change via the
+    /// real network-backed sign in/restore flow otherwise.
+    static func preview(userId: UUID = UUID(), email: String = "preview@example.com") -> AuthStore {
+        let store = AuthStore()
+        store.currentUserId = userId
+        store.currentEmail = email
+        store.isAuthenticated = true
+        store.isRestoringSession = false
+        return store
+    }
+}
+#endif

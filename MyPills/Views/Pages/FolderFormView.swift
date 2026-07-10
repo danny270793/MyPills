@@ -60,3 +60,20 @@ struct FolderFormView: View {
         dismiss()
     }
 }
+
+#Preview("New Folder") {
+    FolderFormView(folder: nil)
+        .environment(AppStore())
+}
+
+#Preview("Edit Folder") {
+    FolderFormView(folder: Folder(
+        id: UUID(),
+        userId: UUID(),
+        name: "Daily Vitamins",
+        createdAt: .now,
+        updatedAt: .now,
+        deletedAt: nil
+    ))
+    .environment(AppStore())
+}

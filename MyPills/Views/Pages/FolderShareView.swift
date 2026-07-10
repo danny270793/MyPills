@@ -89,3 +89,15 @@ struct FolderShareView: View {
         email = ""
     }
 }
+
+#Preview {
+    FolderShareView(folder: Folder(
+        id: UUID(),
+        userId: UUID(),
+        name: "Daily Vitamins",
+        createdAt: .now,
+        updatedAt: .now,
+        deletedAt: nil
+    ))
+    .environment(AppStore())
+}

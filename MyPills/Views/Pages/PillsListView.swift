@@ -83,24 +83,24 @@ struct PillsListView: View {
             }
             if isOwner {
                 ToolbarItem(placement: .secondaryAction) {
-                    Menu {
-                        Button {
-                            showingShareFolder = true
-                        } label: {
-                            Label("Share Folder", systemImage: "person.crop.circle.badge.plus")
-                        }
-                        Button {
-                            showingEditFolder = true
-                        } label: {
-                            Label("Rename Folder", systemImage: "pencil")
-                        }
-                        Button(role: .destructive) {
-                            showingDeleteConfirm = true
-                        } label: {
-                            Label("Delete Folder", systemImage: "trash")
-                        }
+                    Button {
+                        showingShareFolder = true
                     } label: {
-                        Image(systemName: "ellipsis.circle")
+                        Label("Share Folder", systemImage: "person.crop.circle.badge.plus")
+                    }
+                }
+                ToolbarItem(placement: .secondaryAction) {
+                    Button {
+                        showingEditFolder = true
+                    } label: {
+                        Label("Rename Folder", systemImage: "pencil")
+                    }
+                }
+                ToolbarItem(placement: .secondaryAction) {
+                    Button(role: .destructive) {
+                        showingDeleteConfirm = true
+                    } label: {
+                        Label("Delete Folder", systemImage: "trash")
                     }
                 }
             }
@@ -130,5 +130,36 @@ struct PillsListView: View {
             Text("This also deletes the \(sortedPills.count) \(sortedPills.count == 1 ? "pill" : "pills") inside it.")
         }
         .task { await store.loadPills(folderId: folder.id) }
+    }
+}
+
+#Preview("Owner") {
+    let ownerId = UUID()
+    NavigationStack {
+        PillsListView(folder: Folder(
+            id: UUID(),
+            userId: ownerId,
+            name: "Daily Vitamins",
+            createdAt: .now,
+            updatedAt: .now,
+            deletedAt: nil
+        ))
+        .environment(AppStore())
+        .environment(AuthStore.preview(userId: ownerId))
+    }
+}
+
+#Preview("Shared") {
+    NavigationStack {
+        PillsListView(folder: Folder(
+            id: UUID(),
+            userId: UUID(),
+            name: "Daily Vitamins",
+            createdAt: .now,
+            updatedAt: .now,
+            deletedAt: nil
+        ))
+        .environment(AppStore())
+        .environment(AuthStore.preview())
     }
 }

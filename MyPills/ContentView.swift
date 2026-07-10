@@ -12,6 +12,7 @@ struct ContentView: View {
     @Environment(AuthStore.self) private var auth
 
     @State private var showingAddFolder = false
+    @State private var showingProfile = false
     @State private var searchText = ""
 
     private var filteredSummaries: [FolderSummary] {
@@ -29,7 +30,9 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if store.folderSummaries.isEmpty {
+                if !store.hasLoadedFolders {
+                    ProgressView()
+                } else if store.folderSummaries.isEmpty {
                     ContentUnavailableView(
                         "No Folders Yet",
                         systemImage: "folder",
@@ -64,6 +67,9 @@ struct ContentView: View {
             .navigationDestination(for: Folder.self) { folder in
                 PillsListView(folder: folder)
             }
+            .navigationDestination(isPresented: $showingProfile) {
+                ProfileView()
+            }
             .searchable(text: $searchText, prompt: "Search folders")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -74,10 +80,10 @@ struct ContentView: View {
                     }
                 }
                 ToolbarItem(placement: .secondaryAction) {
-                    NavigationLink {
-                        ProfileView()
+                    Button {
+                        showingProfile = true
                     } label: {
-                        Image(systemName: "person.crop.circle")
+                        Label("Profile", systemImage: "person.crop.circle")
                     }
                 }
             }

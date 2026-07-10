@@ -130,3 +130,28 @@ struct PillFormView: View {
         dismiss()
     }
 }
+
+#Preview("New Pill") {
+    PillFormView(pill: nil, folderId: UUID())
+        .environment(AppStore())
+}
+
+#Preview("Edit Pill") {
+    PillFormView(
+        pill: Pill(
+            id: UUID(),
+            userId: UUID(),
+            folderId: UUID(),
+            name: "Vitamin D3",
+            details: "Take one tablet daily with food.",
+            photoBase64: nil,
+            quantity: 30,
+            price: 12.99,
+            createdAt: .now,
+            updatedAt: .now,
+            deletedAt: nil
+        ),
+        folderId: UUID()
+    )
+    .environment(AppStore())
+}
