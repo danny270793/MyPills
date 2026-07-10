@@ -11,28 +11,8 @@ struct ProfileView: View {
 
     var body: some View {
         Form {
-            Section {
-                HStack(spacing: 16) {
-                    Image(systemName: "person.crop.circle.fill")
-                        .font(.system(size: 48))
-                        .foregroundStyle(.secondary)
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(auth.currentEmail ?? "Unknown")
-                            .font(.headline)
-                        Text("Signed in")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                }
-                .padding(.vertical, 4)
-            }
-
             Section("Account") {
                 LabeledContent("Email", value: auth.currentEmail ?? "—")
-                if let userId = auth.currentUserId {
-                    LabeledContent("User ID", value: userId.uuidString)
-                        .textSelection(.enabled)
-                }
             }
 
             Section {
