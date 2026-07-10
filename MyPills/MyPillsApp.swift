@@ -14,6 +14,15 @@ struct MyPillsApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Pill.self)
+        .modelContainer(Self.sharedModelContainer)
     }
+
+    private static let sharedModelContainer: ModelContainer = {
+        let configuration = ModelConfiguration(cloudKitDatabase: .automatic)
+        do {
+            return try ModelContainer(for: Pill.self, configurations: configuration)
+        } catch {
+            fatalError("Failed to create ModelContainer: \(error)")
+        }
+    }()
 }
