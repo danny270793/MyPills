@@ -12,6 +12,7 @@ struct ContentView: View {
     @Environment(AuthStore.self) private var auth
 
     @State private var showingAddFolder = false
+    @State private var showingProfile = false
     @State private var searchText = ""
 
     private var filteredSummaries: [FolderSummary] {
@@ -64,6 +65,9 @@ struct ContentView: View {
             .navigationDestination(for: Folder.self) { folder in
                 PillsListView(folder: folder)
             }
+            .navigationDestination(isPresented: $showingProfile) {
+                ProfileView()
+            }
             .searchable(text: $searchText, prompt: "Search folders")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -73,9 +77,9 @@ struct ContentView: View {
                         Label("Add Folder", systemImage: "folder.badge.plus")
                     }
                 }
-                ToolbarItem(placement: .secondaryAction) {
-                    NavigationLink {
-                        ProfileView()
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        showingProfile = true
                     } label: {
                         Image(systemName: "person.crop.circle")
                     }
