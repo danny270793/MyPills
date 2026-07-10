@@ -19,7 +19,10 @@ struct PillsListView: View {
     @State private var searchText = ""
 
     private var isOwner: Bool {
-        folder.userId == auth.currentUserId
+        if(auth.currentUserId == nil) {
+            return true
+        }
+        return folder.userId == auth.currentUserId
     }
 
     private var currentName: String {
