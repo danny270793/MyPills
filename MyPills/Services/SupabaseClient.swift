@@ -9,12 +9,15 @@
 import Foundation
 
 enum SupabaseError: LocalizedError {
+    case notAuthenticated
     case invalidResponse
     case requestFailed(status: Int, body: String)
     case decodingFailed(Error)
 
     var errorDescription: String? {
         switch self {
+        case .notAuthenticated:
+            return "You need to be signed in to do that."
         case .invalidResponse:
             return "The server returned an unexpected response."
         case .requestFailed(let status, let body):
@@ -53,15 +56,14 @@ struct SupabaseClient {
         return first
     }
 
-    func delete(_ table: String, id: UUID) async throws {
-        let request = makeRequest(table: table, id: id, query: [], method: "DELETE")
-        let (data, response) = try await session.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw SupabaseError.invalidResponse
-        }
-        guard (200..<300).contains(httpResponse.statusCode) else {
-            throw SupabaseError.requestFailed(status: httpResponse.statusCode, body: String(data: data, encoding: .utf8) ?? "")
-        }
+    /// Calls a Postgres function exposed at rest/v1/rpc/<function>. Used for
+    /// the soft_delete_* functions instead of a hard DELETE.
+    func rpc(_ function: String, params: [String: String]) async throws -> Bool {
+        var request = URLRequest(url: SupabaseConfig.url.appendingPathComponent("rest/v1/rpc/\(function)"))
+        request.httpMethod = "POST"
+        applyAuthHeaders(to: &request)
+        request.httpBody = try JSONEncoder().encode(params)
+        return try await send(request)
     }
 
     private func makeRequest(table: String, id: UUID?, query: [URLQueryItem], method: String) -> URLRequest {
@@ -77,13 +79,17 @@ struct SupabaseClient {
 
         var request = URLRequest(url: components.url!)
         request.httpMethod = method
+        applyAuthHeaders(to: &request)
+        return request
+    }
+
+    private func applyAuthHeaders(to request: inout URLRequest) {
         request.setValue(SupabaseConfig.anonKey, forHTTPHeaderField: "apikey")
         // Authenticate as the signed-in user (not just the anon key) so
         // row-level security policies can key off auth.uid().
         let accessToken = SessionStore.shared.accessToken ?? SupabaseConfig.anonKey
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        return request
     }
 
     private func send<T: Decodable>(_ request: URLRequest) async throws -> T {
