@@ -91,4 +91,25 @@ final class AuthStore {
         currentEmail = nil
         currentUserId = nil
     }
+
+    @discardableResult
+    func changePassword(newPassword: String) async -> Bool {
+        isLoading = true
+        errorMessage = nil
+        infoMessage = nil
+        defer { isLoading = false }
+
+        guard let token = sessionStore.accessToken else {
+            errorMessage = "You need to be signed in to do that."
+            return false
+        }
+
+        do {
+            try await auth.updatePassword(accessToken: token, newPassword: newPassword)
+            return true
+        } catch {
+            errorMessage = error.localizedDescription
+            return false
+        }
+    }
 }
