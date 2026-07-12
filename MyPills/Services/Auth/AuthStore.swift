@@ -114,11 +114,12 @@ final class AuthStore {
     }
 }
 
-#if DEBUG
 extension AuthStore {
     /// Builds an already-"signed-in" store for #Preview use, since
     /// currentUserId/currentEmail/isAuthenticated only change via the
-    /// real network-backed sign in/restore flow otherwise.
+    /// real network-backed sign in/restore flow otherwise. Not gated
+    /// behind #if DEBUG because #Preview blocks that call this still
+    /// need to compile in Release (e.g. archiving).
     static func preview(userId: UUID = UUID(), email: String = "preview@example.com") -> AuthStore {
         let store = AuthStore()
         store.currentUserId = userId
@@ -128,4 +129,3 @@ extension AuthStore {
         return store
     }
 }
-#endif
