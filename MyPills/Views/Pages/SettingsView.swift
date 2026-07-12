@@ -31,7 +31,7 @@ struct SettingsView: View {
         #endif
     }
 
-    private static let termsAndConditions = """
+    private static let termsAndConditions: LocalizedStringKey = """
     Last updated: 2026
 
     1. Acceptance of Terms
@@ -62,7 +62,7 @@ struct SettingsView: View {
     Questions about these Terms can be directed to the developer at https://github.com/danny270793.
     """
 
-    private static let privacyPolicy = """
+    private static let privacyPolicy: LocalizedStringKey = """
     Last updated: 2026
 
     1. Information We Collect
