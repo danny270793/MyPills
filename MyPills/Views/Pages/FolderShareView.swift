@@ -25,50 +25,54 @@ struct FolderShareView: View {
 
     var body: some View {
         NavigationStack {
-            Form {
-                Section("Share with") {
-                    HStack {
-                        TextField("Email address", text: $email)
-                            #if os(iOS)
-                            .textInputAutocapitalization(.never)
-                            .keyboardType(.emailAddress)
-                            #endif
-                            .autocorrectionDisabled()
-
-                        Button {
-                            Task { await share() }
-                        } label: {
-                            if isSharing {
-                                ProgressView()
-                            } else {
-                                Text("Share")
-                            }
-                        }
-                        .disabled(!isValidEmail || isSharing)
-                    }
-                }
-
-                Section("People with access") {
-                    if shares.isEmpty {
-                        Text("Only you can see this folder.")
-                            .foregroundStyle(.secondary)
-                    } else {
-                        ForEach(shares) { share in
+            Group {
+                if !store.hasLoadedShares(for: folder.id) {
+                    ProgressView()
+                } else {
+                    Form {
+                        Section("Share with") {
                             HStack {
-                                Text(share.email)
-                                Spacer()
-                                Button(role: .destructive) {
-                                    Task { await store.unshareFolder(id: folder.id, email: share.email) }
+                                TextField("Email address", text: $email)
+                                    #if os(iOS)
+                                    .textInputAutocapitalization(.never)
+                                    .keyboardType(.emailAddress)
+                                    #endif
+                                    .autocorrectionDisabled()
+
+                                Button {
+                                    Task { await share() }
                                 } label: {
-                                    Image(systemName: "person.crop.circle.badge.minus")
+                                    if isSharing {
+                                        ProgressView()
+                                    } else {
+                                        Text("Share")
+                                    }
                                 }
-                                .buttonStyle(.plain)
+                                .disabled(!isValidEmail || isSharing)
+                            }
+                        }
+
+                        Section("People with access") {
+                            if shares.isEmpty {
+                                Text("Only you can see this folder.")
+                                    .foregroundStyle(.secondary)
+                            } else {
+                                ForEach(shares) { share in
+                                    Text(share.email)
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                            Button(role: .destructive) {
+                                                Task { await store.unshareFolder(id: folder.id, email: share.email) }
+                                            } label: {
+                                                Label("Remove", systemImage: "person.crop.circle.badge.minus")
+                                            }
+                                        }
+                                }
                             }
                         }
                     }
+                    .formStyle(.grouped)
                 }
             }
-            .formStyle(.grouped)
             .navigationTitle("Share Folder")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
@@ -78,6 +82,7 @@ struct FolderShareView: View {
                     Button("Done") { dismiss() }
                 }
             }
+            .refreshable { await store.loadShares(folderId: folder.id) }
             .task { await store.loadShares(folderId: folder.id) }
         }
     }

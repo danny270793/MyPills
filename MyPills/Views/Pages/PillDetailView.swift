@@ -76,6 +76,7 @@ struct PillDetailView: View {
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
+                .accessibilityLabel("More")
             }
         }
         .sheet(isPresented: $showingEdit) {

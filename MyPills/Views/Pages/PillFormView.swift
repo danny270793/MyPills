@@ -5,6 +5,9 @@
 
 import SwiftUI
 import PhotosUI
+#if os(iOS)
+import UIKit
+#endif
 
 struct PillFormView: View {
     @Environment(AppStore.self) private var store
@@ -22,6 +25,9 @@ struct PillFormView: View {
     @State private var photoData: Data?
     @State private var selectedPhotoItem: PhotosPickerItem?
     @State private var isSaving = false
+    @State private var showingPhotoSourceDialog = false
+    @State private var showingLibraryPicker = false
+    @State private var showingCamera = false
 
     private var isEditing: Bool { pill != nil }
     private var currencyCode: String {
@@ -38,7 +44,9 @@ struct PillFormView: View {
                             PillImageView(data: photoData)
                                 .frame(width: 100, height: 100)
 
-                            PhotosPicker(selection: $selectedPhotoItem, matching: .images) {
+                            Button {
+                                showingPhotoSourceDialog = true
+                            } label: {
                                 Label(photoData == nil ? "Add Photo" : "Change Photo", systemImage: "photo.badge.plus")
                             }
 
@@ -97,6 +105,21 @@ struct PillFormView: View {
                 }
             }
             .disabled(isSaving)
+            .confirmationDialog("Add Photo", isPresented: $showingPhotoSourceDialog, titleVisibility: .visible) {
+                #if os(iOS)
+                if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    Button("Take Photo") { showingCamera = true }
+                }
+                #endif
+                Button("Choose Photo") { showingLibraryPicker = true }
+            }
+            .photosPicker(isPresented: $showingLibraryPicker, selection: $selectedPhotoItem, matching: .images)
+            #if os(iOS)
+            .fullScreenCover(isPresented: $showingCamera) {
+                CameraPicker(imageData: $photoData)
+                    .ignoresSafeArea()
+            }
+            #endif
         }
     }
 

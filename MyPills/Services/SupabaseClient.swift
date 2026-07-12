@@ -93,6 +93,7 @@ struct SupabaseClient {
     }
 
     private func send<T: Decodable>(_ request: URLRequest) async throws -> T {
+        await DevNetworkDelay.simulate()
         let (data, response) = try await session.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
             throw SupabaseError.invalidResponse

@@ -29,6 +29,14 @@ final class AppStore {
         sharesByFolder[folderId] ?? []
     }
 
+    func hasLoadedPills(for folderId: UUID) -> Bool {
+        pillsByFolder[folderId] != nil
+    }
+
+    func hasLoadedShares(for folderId: UUID) -> Bool {
+        sharesByFolder[folderId] != nil
+    }
+
     func loadFolders() async {
         do {
             folderSummaries = try await folders.fetchAll()
