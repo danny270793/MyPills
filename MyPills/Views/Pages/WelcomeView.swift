@@ -18,6 +18,7 @@ struct WelcomeView: View {
                     .foregroundStyle(.white)
             }
             .frame(width: 120, height: 120)
+            .shadow(color: .accentColor.opacity(0.35), radius: 24, y: 12)
 
             Text("My Pills")
                 .font(.largeTitle.bold())
@@ -28,7 +29,18 @@ struct WelcomeView: View {
                 .padding(.horizontal, 40)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.background)
+        .background {
+            ZStack {
+                Rectangle()
+                    .fill(.background)
+                LinearGradient(
+                    colors: [Color.accentColor.opacity(0.22), .clear],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            }
+            .ignoresSafeArea()
+        }
     }
 }
 
