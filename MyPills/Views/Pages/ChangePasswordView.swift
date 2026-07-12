@@ -83,6 +83,7 @@ struct ChangePasswordView: View {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
+            .accessibilityLabel(isPasswordVisible ? "Hide password" : "Show password")
         }
     }
 
