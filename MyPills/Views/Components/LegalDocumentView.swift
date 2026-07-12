@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct LegalDocumentView: View {
-    let title: String
-    let text: String
+    let title: LocalizedStringKey
+    let text: LocalizedStringKey
 
     var body: some View {
         ScrollView {
