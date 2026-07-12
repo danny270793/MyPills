@@ -26,15 +26,7 @@ struct AboutView: View {
                 HStack {
                     Spacer()
                     VStack(spacing: 12) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .fill(Color.accentColor.gradient)
-                            Image(systemName: "pills.fill")
-                                .font(.system(size: 32))
-                                .foregroundStyle(.white)
-                        }
-                        .frame(width: 72, height: 72)
-                        .shadow(color: .black.opacity(0.15), radius: 8, y: 4)
+                        AppIconBadge()
 
                         Text(appName)
                             .font(.title2.bold())
