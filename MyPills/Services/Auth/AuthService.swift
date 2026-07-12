@@ -40,6 +40,7 @@ struct AuthService {
     func signOut(accessToken: String) async throws {
         var request = makeRequest(path: "logout")
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        await DevNetworkDelay.simulate()
         let (data, response) = try await session.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else {
             let status = (response as? HTTPURLResponse)?.statusCode ?? -1
@@ -53,6 +54,7 @@ struct AuthService {
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         request.httpBody = try JSONEncoder().encode(["password": newPassword])
 
+        await DevNetworkDelay.simulate()
         let (data, response) = try await session.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
             throw SupabaseError.invalidResponse
@@ -86,6 +88,7 @@ struct AuthService {
     }
 
     private func send(_ request: URLRequest) async throws -> Session? {
+        await DevNetworkDelay.simulate()
         let (data, response) = try await session.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
             throw SupabaseError.invalidResponse
