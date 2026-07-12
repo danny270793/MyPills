@@ -12,7 +12,6 @@ struct LoginView: View {
 
     @State private var email = ""
     @State private var password = ""
-    @State private var isSignUpMode = false
     @State private var isPasswordVisible = false
 
     private var isValid: Bool {
@@ -35,9 +34,9 @@ struct LoginView: View {
                     .frame(width: 72, height: 72)
                     .shadow(color: .black.opacity(0.15), radius: 8, y: 4)
 
-                    Text(isSignUpMode ? "Create Account" : "Welcome Back")
+                    Text("Welcome Back")
                         .font(.title2.bold())
-                    Text(isSignUpMode ? "Sign up to start tracking your medications." : "Sign in to manage your pills.")
+                    Text("Sign in to manage your pills.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -109,40 +108,23 @@ struct LoginView: View {
                     }
                 }
 
-                VStack(spacing: 16) {
-                    Button {
-                        Task {
-                            if isSignUpMode {
-                                await auth.signUp(email: email, password: password)
-                            } else {
-                                await auth.signIn(email: email, password: password)
-                            }
-                        }
-                    } label: {
-                        if auth.isLoading {
-                            ProgressView()
-                                .frame(maxWidth: .infinity)
-                        } else {
-                            Text(isSignUpMode ? "Create Account" : "Sign In")
-                                .fontWeight(.semibold)
-                                .frame(maxWidth: .infinity)
-                        }
+                Button {
+                    Task {
+                        await auth.signIn(email: email, password: password)
                     }
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    .disabled(!isValid || auth.isLoading)
-
-                    Button {
-                        isSignUpMode.toggle()
-                        auth.errorMessage = nil
-                        auth.infoMessage = nil
-                    } label: {
-                        Text(isSignUpMode ? "Already have an account? Sign In" : "Don't have an account? Sign Up")
-                            .font(.footnote)
+                } label: {
+                    if auth.isLoading {
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
+                    } else {
+                        Text("Sign In")
+                            .fontWeight(.semibold)
+                            .frame(maxWidth: .infinity)
                     }
-                    .buttonStyle(.plain)
-                    .foregroundStyle(.secondary)
                 }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .disabled(!isValid || auth.isLoading)
             }
             .padding(.horizontal, 24)
             .padding(.top, 8)
