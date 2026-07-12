@@ -58,16 +58,14 @@ struct FolderShareView: View {
                                     .foregroundStyle(.secondary)
                             } else {
                                 ForEach(shares) { share in
-                                    HStack {
-                                        Text(share.email)
-                                        Spacer()
-                                        Button(role: .destructive) {
-                                            Task { await store.unshareFolder(id: folder.id, email: share.email) }
-                                        } label: {
-                                            Image(systemName: "person.crop.circle.badge.minus")
+                                    Text(share.email)
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                            Button(role: .destructive) {
+                                                Task { await store.unshareFolder(id: folder.id, email: share.email) }
+                                            } label: {
+                                                Label("Remove", systemImage: "person.crop.circle.badge.minus")
+                                            }
                                         }
-                                        .buttonStyle(.plain)
-                                    }
                                 }
                             }
                         }
