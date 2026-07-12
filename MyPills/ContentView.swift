@@ -13,6 +13,7 @@ struct ContentView: View {
 
     @State private var showingAddFolder = false
     @State private var showingProfile = false
+    @State private var showingSettings = false
     @State private var searchText = ""
 
     private var filteredSummaries: [FolderSummary] {
@@ -70,6 +71,9 @@ struct ContentView: View {
             .navigationDestination(isPresented: $showingProfile) {
                 ProfileView()
             }
+            .navigationDestination(isPresented: $showingSettings) {
+                SettingsView()
+            }
             .searchable(text: $searchText, prompt: "Search folders")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -84,6 +88,13 @@ struct ContentView: View {
                         showingProfile = true
                     } label: {
                         Label("Profile", systemImage: "person.crop.circle")
+                    }
+                }
+                ToolbarItem(placement: .secondaryAction) {
+                    Button {
+                        showingSettings = true
+                    } label: {
+                        Label("Settings", systemImage: "gearshape")
                     }
                 }
             }
