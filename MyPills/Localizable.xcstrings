@@ -1,394 +1,1137 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld pills" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld pill"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld pills"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld píldora"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld píldoras"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "0.00" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "0.00" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "0,00" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0.00"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0,00"
+          }
+        }
       }
+    },
+    "About" : {
+
     },
     "Account" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Account" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cuenta" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta"
+          }
+        }
       }
     },
     "Add Folder" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Folder" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Agregar carpeta" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Folder"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar carpeta"
+          }
+        }
       }
     },
     "Add Photo" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Photo" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Agregar foto" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Photo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar foto"
+          }
+        }
       }
     },
     "Add Pill" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Pill" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Agregar píldora" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Pill"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar píldora"
+          }
+        }
       }
     },
     "Already have an account? Sign In" : {
+      "extractionState" : "stale",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Already have an account? Sign In" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "¿Ya tienes una cuenta? Inicia sesión" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Already have an account? Sign In"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Ya tienes una cuenta? Inicia sesión"
+          }
+        }
       }
+    },
+    "App" : {
+
+    },
+    "Build" : {
+
     },
     "Cancel" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        }
       }
     },
     "Change Password" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change Password" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cambiar contraseña" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change Password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar contraseña"
+          }
+        }
       }
     },
     "Change Photo" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change Photo" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cambiar foto" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change Photo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar foto"
+          }
+        }
       }
     },
     "Check your email to confirm your account, then sign in." : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Check your email to confirm your account, then sign in." } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Revisa tu correo para confirmar tu cuenta y luego inicia sesión." } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check your email to confirm your account, then sign in."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revisa tu correo para confirmar tu cuenta y luego inicia sesión."
+          }
+        }
       }
+    },
+    "Choose Photo" : {
+
     },
     "Confirm Password" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Confirm Password" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Confirmar contraseña" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar contraseña"
+          }
+        }
       }
     },
     "Create Account" : {
+      "extractionState" : "stale",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create Account" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Crear cuenta" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create Account"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear cuenta"
+          }
+        }
       }
     },
     "Create an account to get started" : {
+      "extractionState" : "stale",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create an account to get started" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Crea una cuenta para comenzar" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create an account to get started"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crea una cuenta para comenzar"
+          }
+        }
       }
+    },
+    "danny270793" : {
+
     },
     "Delete" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Eliminar" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
+        }
       }
     },
     "Delete %@?" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete %@?" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "¿Eliminar %@?" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete %@?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Eliminar %@?"
+          }
+        }
       }
     },
     "Delete Folder" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete Folder" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Eliminar carpeta" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Folder"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar carpeta"
+          }
+        }
       }
     },
     "Description" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Description" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Descripción" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripción"
+          }
+        }
       }
     },
     "Details" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Details" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Detalles" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalles"
+          }
+        }
       }
     },
+    "Developer" : {
+
+    },
     "Don't have an account? Sign Up" : {
+      "extractionState" : "stale",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Don't have an account? Sign Up" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "¿No tienes una cuenta? Regístrate" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't have an account? Sign Up"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿No tienes una cuenta? Regístrate"
+          }
+        }
       }
     },
     "Done" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Done" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Listo" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listo"
+          }
+        }
       }
     },
     "Edit" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Editar" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar"
+          }
+        }
       }
     },
     "Edit Folder" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit Folder" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Editar carpeta" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Folder"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar carpeta"
+          }
+        }
       }
     },
     "Edit Pill" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit Pill" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Editar píldora" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Pill"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar píldora"
+          }
+        }
       }
     },
     "Email" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Email" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Correo electrónico" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo electrónico"
+          }
+        }
       }
     },
     "Email address" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Email address" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Correo electrónico" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email address"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo electrónico"
+          }
+        }
       }
     },
     "Failed to decode response: %@" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Failed to decode response: %@" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Error al decodificar la respuesta: %@" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to decode response: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al decodificar la respuesta: %@"
+          }
+        }
       }
     },
     "Folders" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Folders" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Carpetas" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folders"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carpetas"
+          }
+        }
       }
     },
     "Hide password" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Hide password" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ocultar contraseña" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocultar contraseña"
+          }
+        }
       }
     },
     "Inventory" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Inventory" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Inventario" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inventory"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inventario"
+          }
+        }
       }
     },
     "Keep track of your medications, organized into shareable folders." : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Keep track of your medications, organized into shareable folders." } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Lleva el control de tus medicamentos, organizados en carpetas para compartir." } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep track of your medications, organized into shareable folders."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lleva el control de tus medicamentos, organizados en carpetas para compartir."
+          }
+        }
       }
+    },
+    "Last updated: 2026\n\n1. Acceptance of Terms\nBy using My Pills, you agree to these Terms and Conditions. If you do not agree, please do not use the app.\n\n2. Description of Service\nMy Pills helps you keep track of your medications by organizing them into folders. You may record details such as name, description, quantity, and price, and optionally attach a photo.\n\n3. Not Medical Advice\nMy Pills is an organizational tool only. It does not provide medical advice, diagnosis, or treatment, and is not a substitute for guidance from a qualified healthcare professional. Always verify dosage and usage information with your doctor or pharmacist.\n\n4. Your Account\nYou are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account.\n\n5. Sharing Folders\nYou may choose to share a folder with another person by email. Anyone you share a folder with can view its contents. You are responsible for only sharing folders with people you trust.\n\n6. Accuracy of Information\nYou are solely responsible for the accuracy of the information you enter into the app.\n\n7. Limitation of Liability\nMy Pills is provided \"as is\" without warranties of any kind. To the fullest extent permitted by law, the developer is not liable for any damages arising from your use of the app.\n\n8. Changes to These Terms\nThese Terms may be updated from time to time. Continued use of the app after changes constitutes acceptance of the updated Terms.\n\n9. Contact\nQuestions about these Terms can be directed to the developer at https://github.com/danny270793." : {
+
+    },
+    "Last updated: 2026\n\n1. Information We Collect\n- Account information: the email address and password you use to sign in.\n- App data: the folders and pills you create, including names, descriptions, quantities, prices, and photos you choose to add.\n- Sharing information: the email addresses of people you choose to share a folder with.\n\n2. How We Use Your Information\nYour information is used solely to provide the app's features: authenticating your account, storing your pill and folder data, and enabling folder sharing with people you invite.\n\n3. Where Your Data Is Stored\nYour data is stored using Supabase, a third-party backend provider, which hosts the app's database and handles authentication.\n\n4. Sharing of Information\nWe do not sell your data or share it with advertisers. Folder data is only visible to you and to anyone you explicitly share that folder with.\n\n5. Data Retention and Deletion\nDeleting a folder or pill removes it from your account. If you would like your account and all associated data permanently deleted, contact the developer at https://github.com/danny270793.\n\n6. Security\nWe take reasonable measures to protect your data, but no method of electronic storage is 100% secure.\n\n7. Changes to This Policy\nThis Privacy Policy may be updated from time to time. Continued use of the app after changes constitutes acceptance of the updated policy.\n\n8. Contact\nQuestions about this Privacy Policy can be directed to the developer at https://github.com/danny270793." : {
+
+    },
+    "More" : {
+
     },
     "My Pills" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "My Pills" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "My Pills" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Pills"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Pills"
+          }
+        }
       }
     },
     "Name" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Name" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Nombre" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
+          }
+        }
       }
     },
     "New Folder" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Folder" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Nueva carpeta" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Folder"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueva carpeta"
+          }
+        }
       }
     },
     "New Password" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Password" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Nueva contraseña" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueva contraseña"
+          }
+        }
       }
     },
     "New Pill" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Pill" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Nueva píldora" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Pill"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueva píldora"
+          }
+        }
       }
     },
     "No Folders Yet" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "No Folders Yet" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sin carpetas aún" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Folders Yet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin carpetas aún"
+          }
+        }
       }
     },
     "No Pills Yet" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "No Pills Yet" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sin píldoras aún" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Pills Yet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin píldoras aún"
+          }
+        }
       }
     },
     "OK" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "OK" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Aceptar" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aceptar"
+          }
+        }
       }
     },
     "Only you can see this folder." : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Only you can see this folder." } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Solo tú puedes ver esta carpeta." } }
-      }
-    },
-    "Passwords don't match." : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Passwords don't match." } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Las contraseñas no coinciden." } }
-      }
-    },
-    "People with access" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "People with access" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Personas con acceso" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only you can see this folder."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo tú puedes ver esta carpeta."
+          }
+        }
       }
     },
     "Password" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Password" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Contraseña" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contraseña"
+          }
+        }
+      }
+    },
+    "Passwords don't match." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passwords don't match."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las contraseñas no coinciden."
+          }
+        }
+      }
+    },
+    "People with access" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "People with access"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personas con acceso"
+          }
+        }
       }
     },
     "Price" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Price" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Precio" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Price"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Precio"
+          }
+        }
       }
+    },
+    "Privacy" : {
+
+    },
+    "Privacy Policy" : {
+
     },
     "Profile" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Profile" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Perfil" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil"
+          }
+        }
       }
     },
     "Qty %lld" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Qty %lld" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cant. %lld" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qty %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cant. %lld"
+          }
+        }
       }
     },
     "Quantity" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Quantity" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cantidad" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quantity"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cantidad"
+          }
+        }
       }
     },
     "Quantity: %lld" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Quantity: %lld" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cantidad: %lld" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quantity: %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cantidad: %lld"
+          }
+        }
       }
+    },
+    "Remove" : {
+
     },
     "Remove Photo" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Remove Photo" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Quitar foto" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove Photo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar foto"
+          }
+        }
       }
     },
     "Rename Folder" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Rename Folder" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Renombrar carpeta" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rename Folder"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renombrar carpeta"
+          }
+        }
       }
     },
     "Request failed (%lld): %@" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Request failed (%lld): %@" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Error en la solicitud (%lld): %@" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Request failed (%lld): %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error en la solicitud (%lld): %@"
+          }
+        }
       }
     },
     "Save" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Guardar" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
+          }
+        }
       }
     },
     "Search folders" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search folders" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buscar carpetas" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search folders"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar carpetas"
+          }
+        }
       }
     },
     "Search pills" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search pills" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buscar píldoras" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search pills"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar píldoras"
+          }
+        }
       }
+    },
+    "Settings" : {
+
     },
     "Share" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Share" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Compartir" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir"
+          }
+        }
       }
     },
     "Share Folder" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Share Folder" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Compartir carpeta" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share Folder"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir carpeta"
+          }
+        }
       }
     },
     "Share with" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Share with" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Compartir con" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share with"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir con"
+          }
+        }
       }
     },
     "Show password" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Show password" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mostrar contraseña" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar contraseña"
+          }
+        }
       }
     },
     "Sign In" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sign In" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Iniciar sesión" } }
-      }
-    },
-    "Sign Out" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sign Out" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cerrar sesión" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign In"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión"
+          }
+        }
       }
     },
     "Sign in to manage your pills" : {
+      "extractionState" : "stale",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sign in to manage your pills" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Inicia sesión para gestionar tus píldoras" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in to manage your pills"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicia sesión para gestionar tus píldoras"
+          }
+        }
+      }
+    },
+    "Sign in to manage your pills." : {
+
+    },
+    "Sign Out" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Out"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar sesión"
+          }
+        }
       }
     },
     "Sign out of My Pills?" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sign out of My Pills?" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "¿Cerrar sesión de My Pills?" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign out of My Pills?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cerrar sesión de My Pills?"
+          }
+        }
       }
     },
     "Something went wrong" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Something went wrong" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Algo salió mal" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algo salió mal"
+          }
+        }
       }
+    },
+    "Take Photo" : {
+
     },
     "Tap the + button to add a pill to this folder." : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tap the + button to add a pill to this folder." } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Toca el botón + para agregar una píldora a esta carpeta." } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap the + button to add a pill to this folder."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca el botón + para agregar una píldora a esta carpeta."
+          }
+        }
       }
     },
     "Tap the + button to create your first folder." : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tap the + button to create your first folder." } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Toca el botón + para crear tu primera carpeta." } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap the + button to create your first folder."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca el botón + para crear tu primera carpeta."
+          }
+        }
       }
+    },
+    "Terms and Conditions" : {
+
     },
     "The server returned an unexpected response." : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "The server returned an unexpected response." } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "El servidor devolvió una respuesta inesperada." } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The server returned an unexpected response."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El servidor devolvió una respuesta inesperada."
+          }
+        }
       }
     },
     "This also deletes the %lld pills inside it." : {
@@ -396,16 +1139,36 @@
         "en" : {
           "variations" : {
             "plural" : {
-              "one" : { "stringUnit" : { "state" : "translated", "value" : "This also deletes the %lld pill inside it." } },
-              "other" : { "stringUnit" : { "state" : "translated", "value" : "This also deletes the %lld pills inside it." } }
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This also deletes the %lld pill inside it."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This also deletes the %lld pills inside it."
+                }
+              }
             }
           }
         },
         "es" : {
           "variations" : {
             "plural" : {
-              "one" : { "stringUnit" : { "state" : "translated", "value" : "Esto también elimina la %lld píldora que contiene." } },
-              "other" : { "stringUnit" : { "state" : "translated", "value" : "Esto también elimina las %lld píldoras que contiene." } }
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Esto también elimina la %lld píldora que contiene."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Esto también elimina las %lld píldoras que contiene."
+                }
+              }
             }
           }
         }
@@ -413,32 +1176,38 @@
     },
     "Use at least 6 characters." : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use at least 6 characters." } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Usa al menos 6 caracteres." } }
-      }
-    },
-    "You need to be signed in to do that." : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "You need to be signed in to do that." } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Debes iniciar sesión para hacer eso." } }
-      }
-    },
-    "%lld pills" : {
-      "localizations" : {
         "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : { "stringUnit" : { "state" : "translated", "value" : "%lld pill" } },
-              "other" : { "stringUnit" : { "state" : "translated", "value" : "%lld pills" } }
-            }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use at least 6 characters."
           }
         },
         "es" : {
-          "variations" : {
-            "plural" : {
-              "one" : { "stringUnit" : { "state" : "translated", "value" : "%lld píldora" } },
-              "other" : { "stringUnit" : { "state" : "translated", "value" : "%lld píldoras" } }
-            }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa al menos 6 caracteres."
+          }
+        }
+      }
+    },
+    "Version" : {
+
+    },
+    "Welcome Back" : {
+
+    },
+    "You need to be signed in to do that." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need to be signed in to do that."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debes iniciar sesión para hacer eso."
           }
         }
       }
