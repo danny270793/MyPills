@@ -37,7 +37,9 @@ struct PillsListView: View {
 
     var body: some View {
         Group {
-            if sortedPills.isEmpty {
+            if !store.hasLoadedPills(for: folder.id) {
+                ProgressView()
+            } else if sortedPills.isEmpty {
                 ContentUnavailableView(
                     "No Pills Yet",
                     systemImage: "pills",
@@ -129,6 +131,7 @@ struct PillsListView: View {
         } message: {
             Text("This also deletes the \(sortedPills.count) pills inside it.")
         }
+        .refreshable { await store.loadPills(folderId: folder.id) }
         .task { await store.loadPills(folderId: folder.id) }
     }
 }
